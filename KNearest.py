@@ -1,7 +1,7 @@
 import csv
 import math
 import numpy as np
-from scipy import spatial
+from scipy import spatial #needed to find closest neighbor
 
 runs = 0
 accuracy = []
@@ -37,6 +37,8 @@ while(runs < 10):
 			else:
 				post0 += 1
 
+		#Classify as whichever posterior is highest. (ex. post0 > post1 then classify as 0)
+		#This conditional counts the number of correct classifications
 		if(post1 > post0 and i[3] == 1):
 			correct += 1
 		elif(post0 > post1 and i[3] == 0):
