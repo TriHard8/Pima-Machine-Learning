@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import csv
 import math
 import numpy as np
@@ -9,8 +10,8 @@ while(runs < total_runs):
 	raw_data = np.genfromtxt("pima-indians-diabetes.csv", delimiter = ",", usecols = (1, 2, 3, 8))
 	np.random.shuffle(raw_data) #randomize raw data
 
-	train_data = raw_data[0:len(raw_data)/2] #separate 1st half to training data
-	test_data = raw_data[len(raw_data)/2:] #separate 2nd half to test data
+	train_data = raw_data[0:len(raw_data)//2] #separate 1st half to training data
+	test_data = raw_data[len(raw_data)//2:] #separate 2nd half to test data
 	correct = 0
 	wrong = 0
 
@@ -60,5 +61,5 @@ while(runs < total_runs):
 	runs += 1
 	accuracy.append(100 * float(correct) / (correct + wrong))
 
-print "Accuracy Average: " + str(np.average(accuracy))
-print "Accuracy Standard Deviation: " + str(np.std(accuracy))
+print("Accuracy Average: " + str(np.average(accuracy)))
+print("Accuracy Standard Deviation: " + str(np.std(accuracy)))
