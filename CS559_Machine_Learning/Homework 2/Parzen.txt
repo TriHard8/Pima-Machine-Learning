@@ -1,0 +1,44 @@
+import csv
+import math
+import numpy as np
+from scipy import spatial
+
+runs = 0
+accuracy = []
+while(runs < 10):
+	raw_data = np.genfromtxt("pima-indians-diabetes.csv", delimiter = ",", usecols = (1, 2, 3, 8))
+	np.random.shuffle(raw_data) #randomizes data
+	window_size = 20 #sets radius of hypercube
+
+	train_data = raw_data[0:len(raw_data)/2] #separates the 1st half of data to training data
+	test_data = raw_data[len(raw_data)/2:] #separates the 2nd half of data to testing data
+	correct = 0
+	wrong = 0
+	post0 = 0
+	post1 = 0
+
+	train = np.delete(train_data, 3, 1) #assign training data without column 4 to train
+	tree = spatial.KDTree(train) #assign training data to kd tree
+
+	for i in test_data:
+		closest = tree.query_ball_point(np.delete(i, 3, 0), window_size) #returns the indexes for neighbors inside of window
+		j = 0
+		while(j < len(closest)):
+			if(train_data[closest[j], 3] == 1):
+				post1 += 1
+			else:
+				post0 += 1
+			j += 1		
+	
+		if(post1 > post0 and i[3] == 1):
+			correct += 1
+		elif(post0 > post1 and i[3] == 0):
+			correct += 1
+		else:
+			wrong += 1
+
+	runs += 1
+	accuracy.append(100 * float(correct) / (correct + wrong))
+
+print "Accuracy Average: " + str(np.average(accuracy))
+print "Accuracy Standard Deviation: " + str(np.std(accuracy))

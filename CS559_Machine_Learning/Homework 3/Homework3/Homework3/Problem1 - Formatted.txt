@@ -1,0 +1,41 @@
+Problem 1:
+Question 1 -
+dat:
+	mean [-0.009481 -0.008284 -0.009672]
+	variance	[[.9983 .0001687 .001237]
+			 [.0001687 1.003 .001553]
+			 [.001237 .001553 1.005]]
+
+dat1:
+	mean [0.9905 1.992 2.990]
+	variance	[[.9983 .0001687 .001237]
+			 [.0001687 1.003 .001553]
+			 [.001237 .001553 1.005]]
+
+dat2:
+	mean [9.905 5.975 2.990]
+	variance	[[99.83 .005061 .01237]
+			 [.005061 9.031 .004658]
+			 [.01237 .004658 1.005]]
+
+dat3:
+	mean [11.26 3.532 -1.886]
+	variance	[[49.15 44.62 6.870]
+			 [44.62 58.64 7.514]
+			 [6.870 7.514 2.067]]
+
+Question 2 –
+	The direction of maximum variance for dat2, from the eigenvector, is along the x-axis (the first dimension, which was multipled by 10).  This makes sense since we adjusted variances by multiplying dat1 by the diag[10 3 1] vector.
+	The direction of max variance for dat3, from its eigenvector, is approaching the 1st row of the rotation matrix R.  This makes sense since we rotated our dataset using the R matrix.
+
+Question 3 –
+	The first principal component of dat3 is [0.6651, 0.7427, -0.0770].  Yes this is what would be expected since the original data was rotated, which directly affects the covariance of the data, the principal component(s) would tend towards this rotation matrix.
+
+Question 4 –
+	The mean and variance from dat are as expected, since the data was generated using N(0,1), the mean should be around 0 the diagonals of the covariance matrix around 1.
+	The manipulation of dat to get dat1 would only change the means, by 1, 2 and 3 respectively which is what we confirmed, and variances would remain unchanged.
+	The manipulation of dat1 to dat2, by multiplying by diag[10 3 1] impacts the variance and we confirmed this with our covariance matrix.  The variance matrix should be approximately [100 9 1], which is confirmed in our dat2 covariance matrix.  As the number increases the variance will approach the [100 9 1] variances.
+	Rotating dat2 to obtain dat3 generates expected results.  Calculating the eigenvalues/vectors shows that the principal components will tend towards this rotation matrix as the number of samples is increased.
+ 
+
+
